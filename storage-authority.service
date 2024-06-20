@@ -1,0 +1,19 @@
+[Unit]
+Description=LSI Storage Authority (LSA)
+After=network.target slpd.service
+Requires=slpd.service
+
+[Service]
+Type=forking
+KillMode=mixed
+
+Environment=LD_LIBRARY_PATH=/opt/lsi/storage-authority/bin:/opt/lsi/storage-authority/plugins:$LD_LIBRARY_PATH
+WorkingDirectory=/opt/lsi/storage-authority/bin/
+ExecStartPre=/opt/lsi/storage-authority/server/nginx -p /opt/lsi/storage-authority/server
+ExecStart=/opt/lsi/storage-authority/bin/LSA -start
+
+ExecStop=/opt/lsi/storage-authority/bin/slp_deregister
+ExecStop=/opt/lsi/storage-authority/server/nginx -s stop -p /opt/lsi/storage-authority/server
+
+[Install]
+WantedBy=multi-user.target

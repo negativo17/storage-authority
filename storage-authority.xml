@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>LSI Storage Authority</short>
+  <description>Manage your LSI storage controllers.</description>
+  <port protocol="tcp" port="2463"/>
+</service>

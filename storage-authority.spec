@@ -54,7 +54,7 @@ unzip webgui_rel/LSA_Linux_aarch64.zip
 %if 0%{?rhel} == 8
 mv aarch64/LSIStorageAuthority-%{version}-00.aarch64.rpm .
 %else
-mv aarch64/rhel9/LSIStorageAuthority-008.009.009.000-00.aarch64.rpm .
+mv aarch64/rhel9/LSIStorageAuthority-%{version}-00.aarch64.rpm .
 %endif
 %endif
 

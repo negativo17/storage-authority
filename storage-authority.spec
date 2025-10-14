@@ -5,7 +5,7 @@
 # Docs at: https://techdocs.broadcom.com/us/en/storage-and-ethernet-connectivity/enterprise-storage-solutions/lsa-lsi-storage-authority-software/2-7.html
 
 Name:           storage-authority
-Version:        008.009.009.000
+Version:        008.014.012.000
 Release:        1%{?dist}
 Summary:        Broadcom LSI Storage Authority
 License:        Proprietary
@@ -14,8 +14,8 @@ ExclusiveArch:  aarch64 x86_64
 
 # Search at: https://www.broadcom.com/support/download-search?pg=Storage+Adapters,+Controllers,+and+ICs&pf=Storage+Adapters,+Controllers,+and+ICs&pn=&pa=&po=&dk=lsa&pl=&l=true
 # Note that final URLs, tarball name and tarball structure keep on changing.
-Source0:        https://docs.broadcom.com/docs-and-downloads/LSA_Linux_8_9-%{version}.zip
-Source1:        https://docs.broadcom.com/docs-and-downloads/LSA_Linux_aarch64_8_9-%{version}.zip
+Source0:        https://docs.broadcom.com/docs-and-downloads/%{version}_MR7.34_LSA_Linux.zip
+Source1:        https://docs.broadcom.com/docs-and-downloads/%{version}_MR7.34_LSA_aarch64.zip
 Source2:        %{name}.service
 Source3:        %{name}.xml
 
@@ -40,19 +40,21 @@ create, and manage storage configurations.
 %prep
 %ifarch x86_64
 %autosetup -c
+unzip webgui_rel/LSA_Linux.zip
 %if 0%{?rhel} == 8
-mv LSA_Linux/gcc_8.3.x/LSIStorageAuthority-%{version}-00.x86_64.rpm .
+mv gcc_8.3.x/LSIStorageAuthority-%{version}-00.x86_64.rpm .
 %else
-mv LSA_Linux/gcc_11.2.x/LSIStorageAuthority-%{version}-00.x86_64.rpm .
+mv gcc_11.2.x/LSIStorageAuthority-%{version}-00.x86_64.rpm .
 %endif
 %endif
 
 %ifarch aarch64
 %autosetup -c -T -a 1
+unzip webgui_rel/LSA_Linux_aarch64.zip
 %if 0%{?rhel} == 8
-mv LSA_Linux_aarch64/aarch64/LSIStorageAuthority-%{version}-00.aarch64.rpm .
+mv aarch64/LSIStorageAuthority-%{version}-00.aarch64.rpm .
 %else
-mv LSA_Linux_aarch64/aarch64/rhel9/LSIStorageAuthority-008.009.009.000-00.aarch64.rpm .
+mv aarch64/rhel9/LSIStorageAuthority-008.009.009.000-00.aarch64.rpm .
 %endif
 %endif
 
@@ -103,5 +105,8 @@ install -p -D -m 0644 %{SOURCE3} %{buildroot}%{_prefix}/lib/firewalld/services/%
 %{_unitdir}/%{name}.service
 
 %changelog
+* Tue Oct 14 2025 Simone Caronni <negativo17@gmail.com> - 008.014.012.000-1
+- Update to 008.014.012.000 (MR 7.34/8.14).
+
 * Thu Jun 20 2024 Simone Caronni <negativo17@gmail.com> - 008.009.009.000-1
 - First build.

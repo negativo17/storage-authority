@@ -5,7 +5,7 @@
 # Docs at: https://techdocs.broadcom.com/us/en/storage-and-ethernet-connectivity/enterprise-storage-solutions/lsa-lsi-storage-authority-software/2-7.html
 
 Name:           storage-authority
-Version:        008.014.012.000
+Version:        008.015.010.000
 Release:        1%{?dist}
 Summary:        Broadcom LSI Storage Authority
 License:        Proprietary
@@ -13,9 +13,9 @@ URL:            https://www.broadcom.com/products/storage/raid-controllers
 ExclusiveArch:  aarch64 x86_64
 
 # Search at: https://www.broadcom.com/support/download-search?pg=Storage+Adapters,+Controllers,+and+ICs&pf=Storage+Adapters,+Controllers,+and+ICs&pn=&pa=&po=&dk=lsa&pl=&l=true
-# Note that final URLs, tarball name and tarball structure keep on changing.
-Source0:        https://docs.broadcom.com/docs-and-downloads/%{version}_MR7.34_LSA_Linux.zip
-Source1:        https://docs.broadcom.com/docs-and-downloads/%{version}_MR7.34_LSA_aarch64.zip
+# Note that final URLs, tarball name and tarball structure keep on changing. Also, not every version is available for aarch64.
+Source0:        %{version}_MR_7.35_LSA_Linux.zip
+Source1:        %{version}_MR 7.35_LSA aarch64.zip
 Source2:        %{name}.service
 Source3:        %{name}.xml
 
@@ -105,6 +105,9 @@ install -p -D -m 0644 %{SOURCE3} %{buildroot}%{_prefix}/lib/firewalld/services/%
 %{_unitdir}/%{name}.service
 
 %changelog
+* Mon Feb 09 2026 Simone Caronni <negativo17@gmail.com> - 008.015.010.000-1
+- Update to 008.015.010.000 (MR 7.35/8.15).
+
 * Tue Oct 14 2025 Simone Caronni <negativo17@gmail.com> - 008.014.012.000-1
 - Update to 008.014.012.000 (MR 7.34/8.14).
 
